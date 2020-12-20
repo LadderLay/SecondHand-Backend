@@ -2,9 +2,11 @@ const express = require('express');
 const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser')
 const auth = require("./routes/auth");
+const admin = require("./routes/admin");
+const goods = require("./routes/goods");
 //...路由文件导入
 const mysql = require('mysql');
-const jwt = require('express-jwt');
+//const jwt = require('express-jwt');
 //const db = require('./sql')
 const app = express();
 const secret = 'secret123'; //密钥
@@ -17,10 +19,12 @@ const jwtAuth = expressJwt({
 }).unless({
     path: [ //指定路径不经过 Token 解析
         '/auth/login',
-        '/auth/signup'
+        '/auth/signup',
+        'admin/login'
     ]  
 })
-exports.jwtAuth = jwtAuth;//
+exports.jwtAuth = jwtAuth;//...
+
 app.use(jwtAuth);
 app.use(bodyParser.json());
 app.use(function (err, req, res, next) {
@@ -45,6 +49,8 @@ app.all('*', (req, res, next) => {
 })
 
 app.use("/auth", auth);
+app.use("/admin",admin);
+app.use("/goods",goods);
 //路由配置
 //...
 

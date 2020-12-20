@@ -18,3 +18,6 @@ values(2018214877, 3);
 insert into comments(product_id, user_id, comment_detail)
 values(2, 2018214875, "hly receve comments from 875"),
 (3, 2018214877, "hly comments 875");
+
+insert into admins(admin_id, admin_password)
+values(2018, "2018test");

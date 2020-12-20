@@ -19,11 +19,12 @@ create table admins
 
 create table products
 (
-    product_id int not null,
+    product_id char(50) not null,
     product_name char(50) not null,
     product_class char(50) null,
     product_pic char(255) null,
     product_describe char(255) null,
+    product_detail char(255) null,
     product_state boolean not null default 1,
     product_price int null,
     product_time timestamp  null ,
@@ -31,7 +32,6 @@ create table products
     PRIMARY KEY (product_id),
     FOREIGN KEY (product_seller)
     REFERENCES users(user_id)
-    
 );
 
 create table buylists

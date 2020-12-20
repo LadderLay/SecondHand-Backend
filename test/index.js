@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '123456',
-  database : 'login_test'
+  database : 'secondHand'
 });
  
 connection.connect();
@@ -50,7 +50,7 @@ app.post('/login', (req, res) => {
 	// 接收参数
 	let {account, password} = req.body;
 
-	const sqlStr = `select * from users where account='${account}' and password='${password}'`;
+	let sqlStr = `SELECT * FROM users WHERE user_id='${account}' AND user_password='${password}'`;
 	connection.query(sqlStr, (err, data) => {
 		if (err) throw err; 
 		if (data.length) { 
@@ -73,7 +73,20 @@ app.post('/login', (req, res) => {
 
 //注册
 app.post('/signup', (req, res) => {
-    let {account, password} = req.body;
+    const {username, account, password} = req.body;
+    console.log(req.body)
+    let sqlStr = 'INSERT INTO users (user_name,user_id,user_password) VALUES(?,?,?)';
+    const value = [username, account, password];
+
+    connection.query(sqlStr, value, (err, data) => {
+        if(err) {
+            //console.log('[INSERT ERROR] - ',err.message);
+            res.json({code: 0, res: '注册失败，请重新再试。'})
+            throw err;
+        }
+
+        res.json({code: 1, res:'注册成功！'})
+    })
 })
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

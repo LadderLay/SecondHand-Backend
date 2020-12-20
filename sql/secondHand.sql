@@ -7,7 +7,6 @@ create table users
     user_id int NOT NULL,
     user_name char(50) NOT NULL,
     user_password char(50) NOT NULL,
-    user_token char(255) NULL,
     primary key (user_id)
 );
 

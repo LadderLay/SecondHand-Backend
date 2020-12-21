@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const auth = require("./routes/auth");
 const admin = require("./routes/admin");
 const goods = require("./routes/goods");
+const user = require('./routes/user');
+const comments = require('./routes/comments');
 //...路由文件导入
 const mysql = require('mysql');
 //const jwt = require('express-jwt');
@@ -20,7 +22,7 @@ const jwtAuth = expressJwt({
     path: [ //指定路径不经过 Token 解析
         '/auth/login',
         '/auth/signup',
-        'admin/login'
+        '/admin/login',
     ]  
 })
 exports.jwtAuth = jwtAuth;//...
@@ -37,7 +39,7 @@ app.use(function (err, req, res, next) {
 connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '123456',
+    password : '2yuhly',
     database : 'secondHand'    
 });
 connection.connect();
@@ -51,6 +53,8 @@ app.all('*', (req, res, next) => {
 app.use("/auth", auth);
 app.use("/admin",admin);
 app.use("/goods",goods);
+app.use("/user", user);
+app.use("/comments", comments);
 //路由配置
 //...
 

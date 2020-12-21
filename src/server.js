@@ -6,6 +6,7 @@ const admin = require("./routes/admin");
 const goods = require("./routes/goods");
 const user = require('./routes/user');
 const comments = require('./routes/comments');
+const cart = require('./routes/cart');
 //...路由文件导入
 const mysql = require('mysql');
 //const jwt = require('express-jwt');
@@ -55,6 +56,7 @@ app.use("/admin",admin);
 app.use("/goods",goods);
 app.use("/user", user);
 app.use("/comments", comments);
+app.use("/cart", cart);
 //路由配置
 //...
 

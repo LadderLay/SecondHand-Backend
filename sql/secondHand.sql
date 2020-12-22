@@ -19,7 +19,7 @@ create table admins
 
 create table products
 (
-    product_id char(50) not null,
+    product_id int not null primary key AUTO_INCREMENT,
     product_name char(50) not null,
     product_class char(50) null,
     product_pic char(255) null,
@@ -29,26 +29,28 @@ create table products
     product_price int null,
     product_time timestamp  null ,
     product_seller int not null,
-    PRIMARY KEY (product_id),
     FOREIGN KEY (product_seller)
     REFERENCES users(user_id)
 );
 
 create table buylists
 (
-    user_id int not null primary key,
+    id int not null PRIMARY KEY AUTO_INCREMENT,
+    user_id int not null ,
     product_id int not null
 );
 
 create table cartlists
 (
-    user_id int not null PRIMARY KEY,
+    id int not null PRIMARY KEY AUTO_INCREMENT,
+    user_id int not null ,
     product_id int not null
 );
 
 create table comments 
 (
-    product_id int not null PRIMARY KEY,
+    id int not null PRIMARY KEY AUTO_INCREMENT,
+    product_id int not null ,
     user_id int not null ,
     comment_detail char(255) null,
     FOREIGN KEY (user_id)

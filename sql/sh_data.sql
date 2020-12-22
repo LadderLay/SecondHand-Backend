@@ -4,10 +4,10 @@ values(2018214877, "Wendy", "877"),
 (2018214875, "xf", "875")
 ;
 
-insert into products(product_id, product_name, product_seller)
-values(1, "社会学的邀请", 2018214877),
-(2, "认知天性", 2018214878),
-(3, "民俗学", 2018214875);
+insert into products( product_name, product_seller)
+values("社会学的邀请", 2018214877),
+( "认知天性", 2018214878),
+("民俗学", 2018214875);
 
 insert into buylists(user_id, product_id)
 values(2018214877, 2);

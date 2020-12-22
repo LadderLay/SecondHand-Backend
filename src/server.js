@@ -5,6 +5,7 @@ const auth = require("./routes/auth");
 const admin = require("./routes/admin");
 const goods = require("./routes/goods");
 //...路由文件导入
+require('dotenv').config()
 const mysql = require('mysql');
 //const jwt = require('express-jwt');
 //const db = require('./sql')
@@ -35,9 +36,9 @@ app.use(function (err, req, res, next) {
 })
 
 connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '123456',
+    host     : process.env.DB_HOST,
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASS,
     database : 'secondHand'    
 });
 connection.connect();

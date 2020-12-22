@@ -4,6 +4,9 @@ const bodyParser = require('body-parser')
 const auth = require("./routes/auth");
 const admin = require("./routes/admin");
 const goods = require("./routes/goods");
+const user = require('./routes/user');
+const comments = require('./routes/comments');
+const cart = require('./routes/cart');
 //...路由文件导入
 require('dotenv').config()
 const mysql = require('mysql');
@@ -21,7 +24,7 @@ const jwtAuth = expressJwt({
     path: [ //指定路径不经过 Token 解析
         '/auth/login',
         '/auth/signup',
-        'admin/login'
+        '/admin/login',
     ]  
 })
 exports.jwtAuth = jwtAuth;//...
@@ -52,6 +55,9 @@ app.all('*', (req, res, next) => {
 app.use("/auth", auth);
 app.use("/admin",admin);
 app.use("/goods",goods);
+app.use("/user", user);
+app.use("/comments", comments);
+app.use("/cart", cart);
 //路由配置
 //...
 

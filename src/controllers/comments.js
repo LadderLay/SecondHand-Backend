@@ -25,6 +25,19 @@ exports.sendGet = ( req, res ) => {
 
 exports.sendPost = ( req, res ) => {
     // 发布评论是商品详情页
+    const{product_id, user_id, content} = req.body;
+    let sqlStr = 'INSERT INTO comments (product_id,user_id,comment_detail) VALUES(?,?,?)';
+    const value = [product_id, user_id, content];
+
+    connection.query(sqlStr, value, (err, data) => {
+        if(err) {
+            res.json(403,{code: 0, res: '评论失败，请重新再试。'})
+            throw err;
+        }
+        res.json({code: 1, res:'评论成功！'})
+    })    
+
+
 }
 
 exports.receive = ( req, res ) => {

@@ -25,7 +25,7 @@ create table products
     product_pic char(255) null,
     product_describe char(255) null,
     product_detail char(255) null,
-    product_state boolean not null default 1,
+    product_state int not null default 1,
     product_price int null,
     product_time timestamp  null ,
     product_seller int not null,

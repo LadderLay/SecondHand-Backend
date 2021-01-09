@@ -1,7 +1,9 @@
 insert into users(user_id, user_name, user_password)
 values(2018214877, "Wendy", "877"),
 (2018214878, "liao", "878"),
-(2018214875, "xf", "875")
+(2018214875, "xf", "875"),
+(2018214870,"可爱多","123456"),
+(2022214601,"小测","123456")
 ;
 
 insert into products( product_name, product_seller)

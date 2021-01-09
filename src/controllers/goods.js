@@ -32,17 +32,17 @@ exports.detail = (req, res) => {
 }
 
 exports.publish = (req, res) => {
-    const id = produceID();
+    //const id = produceID();
     const state = 1;
     //暂时省略了对pic的处理
     const { name, type, describe, detail, user, price, time } = req.body;
     //pic = undefined || ...设置默认图片
-    let sql = 'INSERT INTO products (product_id,product_name,product_class,product_describe,product_detail,product_state,product_price,product_time,product_seller) VALUES(?,?,?,?,?,?,?,?,?)'; 
-    const value = [id, name, type, describe, detail, state, price, time, user];
+    let sql = 'INSERT INTO products (product_name,product_class,product_describe,product_detail,product_state,product_price,product_time,product_seller) VALUES(?,?,?,?,?,?,?,?)'; 
+    const value = [name, type, describe, detail, state, price, time, user];
     connection.query(sql, value, (err, data) => {
         if(err) {
             console.log(err)
-            res.json({code: 0, res: '发布失败。请稍后再试。'});
+            res.json(403,{code: 0, res: '发布失败。请稍后再试。'});
         } else {
             res.json({code: 1, res: '发布成功！'})
         }
@@ -50,5 +50,15 @@ exports.publish = (req, res) => {
 }
 
 exports.del = (req, res) => {
-    //
+    const {product_id, seller} = req.body;
+	console.log(req.body)//
+    let sqlStr = `UPDATE products SET product_state=2 WHERE product_id='${product_id}'+product_seller='${seller}'`;
+	connection.query(sqlStr, (err, data) => {
+		if (err){
+            console.log(err)
+            res.json(401,{code: 0, res: '商品删除失败.'});
+        } else {
+            res.json({ code: 0, res: '商品删除成功!'})
+        }
+	})   
 }

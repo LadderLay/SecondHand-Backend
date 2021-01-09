@@ -10,7 +10,7 @@ exports.signup = (req, res) => {
     connection.query(sqlStr, value, (err, data) => {
         if(err) {
             //console.log('[INSERT ERROR] - ',err.message);
-            res.json({code: 0, res: '注册失败，请重新再试。'})
+            res.json(403,{code: 0, res: '注册失败，请重新再试。'})
             throw err;
         }
 
@@ -36,7 +36,7 @@ exports.login = (req, res) => {
 
 			res.json({ code: 0, res: '欢迎你，登录成功!', token })
 		} else { //错误判断简化了
-			res.json({code: 1, res: '用户名或密码错误!'})
+			res.json(403,{code: 1, res: '用户名或密码错误!'})
 		}
 	})    
 }

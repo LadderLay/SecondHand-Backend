@@ -24,3 +24,15 @@ values(2, 2018214875, "878 receve comments from 875"),
 
 insert into admins(admin_id, admin_password)
 values(2018, "2018test");
+
+update products set product_price = 13, product_describe = "999新" 
+where product_name = "社会学的邀请"
+
+update products set product_price = 12, product_describe = "大甩卖啊啊啊啊" 
+where product_name = "民俗学"
+
+update products set product_price = 10, product_describe = "一本工具书？？" 
+where product_name = "认知天性"
+
+insert into cartlists(user_id, product_id)
+values(2018214877, 2);

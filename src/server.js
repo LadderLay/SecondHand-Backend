@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser')
 const auth = require("./routes/auth");
@@ -29,6 +30,7 @@ const jwtAuth = expressJwt({
 })
 exports.jwtAuth = jwtAuth;//...
 
+app.use(cors());
 app.use(jwtAuth);
 app.use(bodyParser.json());
 app.use(function (err, req, res, next) {

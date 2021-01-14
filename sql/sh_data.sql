@@ -30,6 +30,7 @@ values("冀西南林路行","其他","https://img9.doubanio.com/view/subject/m/p
 
 INSERT INTO products(product_name,product_class,product_describe,product_detail,product_state,product_price,product_time,product_seller,product_pic)
 VALUES('日语N2蓝宝书','书籍','七成新','可附送配套练习册！急急急出！',1,'10','2021-01-14 12:07:30','2018214870','https://lh3.googleusercontent.com/proxy/Hbwgg-j71V5llEVAVI9_qQufUC979v4B2wNWncSHCZGpt1i8hERpOHN1PDLS3nNaGvqNRwMgACd7JYYu5krTLrGx2QaBALHTSsNuHA');
+
 update products set product_price = 13, product_describe = "999新" 
 where product_name = "社会学的邀请";
 
@@ -42,8 +43,6 @@ where product_name = "认知天性";
 insert into cartlists(user_id, product_id)
 values(2018214877, 2);
 
-alter table products modify product_pic BLOB null;
-
 -- update products 
 -- set product_pic = load_file('/Users/mac/Desktop/SecondHand-Backend/src/tmp/people.JPG') 
 -- where product_name = "民俗学";
@@ -55,3 +54,9 @@ alter table products modify product_pic BLOB null;
 -- update products 
 -- set product_pic = load_file('/Users/mac/Desktop/SecondHand-Backend/src/tmp/social.JPG') 
 -- where product_name = "社会学的邀请";
+
+insert into buylists(user_id, product_id)
+values(2018214875, 1);
+
+update products set product_state = 0
+where product_seller = 2018214877;

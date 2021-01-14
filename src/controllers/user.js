@@ -29,6 +29,9 @@ exports.buy = ( req, res ) => {
 
 exports.sell = ( req, res ) => {
     const { user_id } = req.query
-    let sql = `select * from products where product_seller = ${user_id}`
+    let sql = `select * from products, users, buylists
+     where products.product_seller = ${user_id}
+     and buylists.product_id = products.product_id
+     and buylists.user_id = users.user_id`
     connection.query(sql, callback(res))
 }

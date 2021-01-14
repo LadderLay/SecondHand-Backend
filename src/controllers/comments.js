@@ -14,9 +14,10 @@ const callbackTest = ( err, data ) => {
 }
 exports.sendGet = ( req, res ) => {
     const { user_id } = req.query
-    let sql = `select * from comments, products
+    let sql = `select * from comments, products, users
                where comments.user_id = ${user_id}
-               and comments.product_id = products.product_id`
+               and comments.product_id = products.product_id
+               and products.product_seller = users.user_id`
     // ?? callback 一定需要传参数res吗，connection这个变量外部的呀！！
     // 作用域的问题 显然在这里是可以访问到connection的，但是callback无法访问到res
     // 不传会error
@@ -42,8 +43,9 @@ exports.sendPost = ( req, res ) => {
 
 exports.receive = ( req, res ) => {
     const { user_id } = req.query
-    let sql = `select * from comments, products
+    let sql = `select * from comments, products, users
                 where products.product_seller = ${user_id}
-                and products.product_id = comments.product_id`
+                and products.product_id = comments.product_id
+                and comments.user_id = users.user_id`
     connection.query(sql, callback(res))
 }

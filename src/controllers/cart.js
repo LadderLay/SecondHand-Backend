@@ -16,8 +16,9 @@ exports.cartList = (req, res) => {
 //     return res
 // }
 exports.cartDel = (req, res) => {
-    const {product_id_list} = req.body
-    let sql = `delete from cartlists where product_id in (${product_id_list})`
+    const {product_id, user_id} = req.body
+    let sql = `delete from cartlists where product_id = ${product_id} and user_id = ${user_id}`
+    // product_id in (1, 2, 3);
     // try{
     //     connection.query(sql, callback(res))
     // }catch(error){
@@ -30,4 +31,13 @@ exports.cartAdd = (req, res) => {
     const {product_id, user_id} = req.body
     let sql = `insert into cartlists(user_id, product_id) values(${user_id}, ${product_id})`
     connection.query(sql, callback(res))
+}
+
+exports.checkout = (req, res) => {
+    const {product_id, user_id} = req.body
+    let sql = `insert into buylists(user_id, product_id) values(${user_id}, ${product_id})`
+    connection.query(sql, res => console.log(res))
+    let sql2 = `delete from cartlists where product_id = ${product_id} and user_id=${user_id}`
+    connection.query(sql2, res => console.log(res))
+    res.json({msg: '成功'})
 }

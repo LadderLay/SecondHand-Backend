@@ -32,18 +32,18 @@ exports.detail = (req, res) => {
 }
 
 exports.publish = (req, res) => {
-    //const id = produceID();
     const state = 1;
     //暂时省略了对pic的处理
     const { name, type, describe, detail, user, price, time } = req.body;
-    //pic = undefined || ...设置默认图片
-    let sql = 'INSERT INTO products (product_name,product_class,product_describe,product_detail,product_state,product_price,product_time,product_seller) VALUES(?,?,?,?,?,?,?,?)'; 
-    const value = [name, type, describe, detail, state, price, time, user];
+    const pic = "https://lh3.googleusercontent.com/proxy/Hbwgg-j71V5llEVAVI9_qQufUC979v4B2wNWncSHCZGpt1i8hERpOHN1PDLS3nNaGvqNRwMgACd7JYYu5krTLrGx2QaBALHTSsNuHA"
+    let sql = 'INSERT INTO products (product_name,product_class,product_describe,product_detail,product_state,product_price,product_time,product_seller,product_pic) VALUES(?,?,?,?,?,?,?,?,?)'; 
+    const value = [name, type, describe, detail, state, price, time, user, pic];
     connection.query(sql, value, (err, data) => {
         if(err) {
             console.log(err)
             res.json(403,{code: 0, res: '发布失败。请稍后再试。'});
         } else {
+            console.log(sql)//
             res.json({code: 1, res: '发布成功！'})
         }
     })
